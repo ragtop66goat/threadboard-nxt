@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import Link from "next/link";
 import InfiniteScroll from "react-infinite-scroll-component";
 import ProfileImage from "./ProfileImage";
@@ -55,10 +54,6 @@ export default function InfiniteTweetList({
     </ul>
   );
 }
-
-const dateTimeFormatter = new Intl.DateTimeFormat(undefined, {
-  dateStyle: "short",
-});
 
 function TweetCard({
   id,
@@ -121,7 +116,7 @@ function TweetCard({
           </Link>
           <span className="text-gray-500">-</span>
           <span className="text-gray-500">
-            {dateTimeFormatter.format(createdAt)}
+            {createdAt.toString().substring(0, 15)}
           </span>
         </div>
         <p className="whitespace-pre-wrap">{content}</p>
@@ -150,6 +145,7 @@ function HeartButton({
   onClick,
 }: HeartButtonProps) {
   const session = useSession();
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const HeartIcon = likedByMe ? VscHeartFilled : VscHeart;
 
   if (session.status !== "authenticated") {
