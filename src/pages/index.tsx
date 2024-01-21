@@ -12,7 +12,7 @@ export default function Home() {
   const session = useSession();
   return (
     <>
-      todo: 1:49:00 of the tutorial
+      todo: 2:05:00 of the tutorial
       <header className="sticky top-0 z-10 border-b bg-white pt-2">
         <h1 className="mb-2 px-4 text-lg font-bold">Home</h1>
         {session.status === "authenticated" && (
