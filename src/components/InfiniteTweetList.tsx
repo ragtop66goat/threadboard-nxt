@@ -20,7 +20,7 @@ type Tweet = {
 type InfiniteTweetListProps = {
   isLoading: boolean;
   isError: boolean;
-  hasMore: boolean;
+  hasMore: boolean | undefined;
   fetchNewTweets: () => Promise<unknown>;
   tweets?: Tweet[];
 };
@@ -29,7 +29,7 @@ export default function InfiniteTweetList({
   tweets,
   isError,
   isLoading,
-  hasMore,
+  hasMore = false,
   fetchNewTweets,
 }: InfiniteTweetListProps) {
   if (isLoading) return <LoadingSpinner />;
@@ -95,6 +95,14 @@ function TweetCard({
         };
       };
       trpcUtils.tweet.infiniteFeed.setInfiniteData({}, updateData);
+      trpcUtils.tweet.infiniteFeed.setInfiniteData(
+        { onlyFollowing: true },
+        updateData,
+      );
+      trpcUtils.tweet.infiniteProfileFeed.setInfiniteData(
+        { userId: user.id },
+        updateData,
+      );
     },
   });
 
